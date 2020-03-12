@@ -1,0 +1,423 @@
+
+=encoding utf8
+
+=head1 NAME
+
+FlightRecorder
+
+=cut
+
+=head1 ABSTRACT
+
+Logging for Distributed Systems
+
+=cut
+
+=head1 SYNOPSIS
+
+  package main;
+
+  use FlightRecorder;
+
+  my $f = FlightRecorder->new;
+
+  # $f->begin('try');
+  # $f->debug('something happend');
+  # $f->end;
+
+=cut
+
+=head1 DESCRIPTION
+
+This package provides a simple mechanism for logging events with context,
+serializing and distributing the event logs, and producing a transcript of
+activity to provide insight into the behavior of distributed systems.
+
+=cut
+
+=head1 INTEGRATES
+
+This package integrates behaviors from:
+
+L<Data::Object::Role::Pluggable>
+
+L<Data::Object::Role::Throwable>
+
+=cut
+
+=head1 ATTRIBUTES
+
+This package has the following attributes:
+
+=cut
+
+=head2 format
+
+  format(Str)
+
+This attribute is read-write, accepts C<(Str)> values, and is optional.
+
+=cut
+
+=head2 head
+
+  head(Str)
+
+This attribute is read-write, accepts C<(Str)> values, and is optional.
+
+=cut
+
+=head2 item
+
+  item(HashRef)
+
+This attribute is read-only, accepts C<(HashRef)> values, and is optional.
+
+=cut
+
+=head2 level
+
+  level(Enum[qw(debug info warn error fatal)])
+
+This attribute is read-only, accepts C<(Enum[qw(debug info warn error fatal)])> values, and is optional.
+
+=cut
+
+=head2 logs
+
+  logs(ArrayRef[HashRef])
+
+This attribute is read-only, accepts C<(ArrayRef[HashRef])> values, and is optional.
+
+=cut
+
+=head2 refs
+
+  refs(HashRef)
+
+This attribute is read-only, accepts C<(HashRef)> values, and is optional.
+
+=cut
+
+=head1 METHODS
+
+This package implements the following methods:
+
+=cut
+
+=head2 begin
+
+  begin(Str $label) : Object
+
+The begin method creates and logs a new context.
+
+=over 4
+
+=item begin example #1
+
+  # given: synopsis
+
+  $f->begin('test')
+
+=back
+
+=cut
+
+=head2 branch
+
+  branch(Str $label) : Object
+
+The branch method creates and returns a new L<FlightRecorder> object which
+shares the event log with the parent object. This method creates a new context
+when called.
+
+=over 4
+
+=item branch example #1
+
+  # given: synopsis
+
+  $f->begin('test')->branch('next')
+
+=back
+
+=cut
+
+=head2 data
+
+  data(HashRef[Str] $data) : Object
+
+The data method associates arbitrary metadata with the last event.
+
+=over 4
+
+=item data example #1
+
+  # given: synopsis
+
+  $f->debug('something happened')->data({
+    error => 'unknown at ./example line 10'
+  });
+
+=back
+
+=cut
+
+=head2 debug
+
+  debug(Str @message) : Object
+
+The debug method logs a C<debug> level event with context.
+
+=over 4
+
+=item debug example #1
+
+  # given: synopsis
+
+  $f->debug('something happened')
+
+=back
+
+=cut
+
+=head2 end
+
+  end() : Object
+
+The end method logs the end of the current context.
+
+=over 4
+
+=item end example #1
+
+  # given: synopsis
+
+  $f->begin('main')->end
+
+=back
+
+=cut
+
+=head2 error
+
+  error(Str @message) : Object
+
+The error method logs an C<error> level event with context.
+
+=over 4
+
+=item error example #1
+
+  # given: synopsis
+
+  $f->error('something happened')
+
+=back
+
+=cut
+
+=head2 fatal
+
+  fatal(Str @message) : Object
+
+The fatal method logs a C<fatal> level event with context.
+
+=over 4
+
+=item fatal example #1
+
+  # given: synopsis
+
+  $f->fatal('something happened')
+
+=back
+
+=cut
+
+=head2 info
+
+  info(Str @message) : Object
+
+The info method logs an C<info> level event with context.
+
+=over 4
+
+=item info example #1
+
+  # given: synopsis
+
+  $f->info('something happened')
+
+=back
+
+=cut
+
+=head2 output
+
+  output(FileHandle $handle) : Str
+
+The output method outputs the last event using the format defined in the
+C<format> attribute.
+
+=over 4
+
+=item output example #1
+
+  # given: synopsis
+
+  $f->begin('test')->output
+
+=back
+
+=cut
+
+=head2 report
+
+  report(Str $name, Str $level) : Object
+
+The report method loads and returns the specified report plugin.
+
+=over 4
+
+=item report example #1
+
+  # given: synopsis
+
+  $f->report('verbose')
+
+=back
+
+=over 4
+
+=item report example #2
+
+  # given: synopsis
+
+  $f->report('succinct', 'fatal')
+
+=back
+
+=cut
+
+=head2 serialize
+
+  serialize() : HashRef
+
+The serialize method normalizes and serializes the event log and returns it as
+a C<hashref>.
+
+=over 4
+
+=item serialize example #1
+
+  # given: synopsis
+
+  $f->begin('main')->serialize
+
+=back
+
+=cut
+
+=head2 succinct
+
+  succinct() : Object
+
+The succinct method loads and returns the L<FlightRecorder::Plugin::Succinct>
+report plugin.
+
+=over 4
+
+=item succinct example #1
+
+  # given: synopsis
+
+  $f->succinct
+
+=back
+
+=cut
+
+=head2 switch
+
+  switch(Str $name) : Object
+
+The switch method finds and sets the current context based on the name
+provided.
+
+=over 4
+
+=item switch example #1
+
+  # given: synopsis
+
+  $f->begin('main')->begin('test')->switch('main')
+
+=back
+
+=cut
+
+=head2 verbose
+
+  verbose() : Object
+
+The verbose method loads and returns the L<FlightRecorder::Plugin::Verbose>
+report plugin.
+
+=over 4
+
+=item verbose example #1
+
+  # given: synopsis
+
+  $f->verbose
+
+=back
+
+=cut
+
+=head2 warn
+
+  warn(Str @message) : Object
+
+The warn method logs a C<warn> level event with context.
+
+=over 4
+
+=item warn example #1
+
+  # given: synopsis
+
+  $f->warn('something happened')
+
+=back
+
+=cut
+
+=head1 AUTHOR
+
+Al Newkirk, C<awncorp@cpan.org>
+
+=head1 LICENSE
+
+Copyright (C) 2011-2019, Al Newkirk, et al.
+
+This is free software; you can redistribute it and/or modify it under the terms
+of the The Apache License, Version 2.0, as elucidated in the L<"license
+file"|https://github.com/iamalnewkirk/flight-recorder/blob/master/LICENSE>.
+
+=head1 PROJECT
+
+L<Wiki|https://github.com/iamalnewkirk/flight-recorder/wiki>
+
+L<Project|https://github.com/iamalnewkirk/flight-recorder>
+
+L<Initiatives|https://github.com/iamalnewkirk/flight-recorder/projects>
+
+L<Milestones|https://github.com/iamalnewkirk/flight-recorder/milestones>
+
+L<Contributing|https://github.com/iamalnewkirk/flight-recorder/blob/master/CONTRIBUTE.md>
+
+L<Issues|https://github.com/iamalnewkirk/flight-recorder/issues>
+
+=cut
