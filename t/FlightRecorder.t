@@ -53,6 +53,12 @@ method: warn
 
 =cut
 
+=libraries
+
+Types::Standard
+
+=cut
+
 =attributes
 
 head: rw, opt, Str

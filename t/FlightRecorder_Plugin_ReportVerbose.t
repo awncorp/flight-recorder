@@ -43,6 +43,12 @@ method: generate
 
 =cut
 
+=libraries
+
+Types::Standard
+
+=cut
+
 =attributes
 
 level: rw, opt, Enum[qw(debug info warn error fatal)]
