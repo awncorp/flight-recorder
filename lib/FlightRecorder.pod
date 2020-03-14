@@ -45,6 +45,14 @@ L<Data::Object::Role::Throwable>
 
 =cut
 
+=head1 LIBRARIES
+
+This package uses type constraints from:
+
+L<Types::Standard>
+
+=cut
+
 =head1 ATTRIBUTES
 
 This package has the following attributes:

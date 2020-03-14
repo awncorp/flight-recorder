@@ -33,6 +33,12 @@ INTEGRATES
 
     Data::Object::Role::Throwable
 
+LIBRARIES
+
+    This package uses type constraints from:
+
+    Types::Standard
+
 ATTRIBUTES
 
     This package has the following attributes:

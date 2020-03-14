@@ -32,6 +32,12 @@ This package integrates behaviors from:
 
 [Data::Object::Role::Throwable](https://metacpan.org/pod/Data%3A%3AObject%3A%3ARole%3A%3AThrowable)
 
+# LIBRARIES
+
+This package uses type constraints from:
+
+[Types::Standard](https://metacpan.org/pod/Types%3A%3AStandard)
+
 # ATTRIBUTES
 
 This package has the following attributes:
