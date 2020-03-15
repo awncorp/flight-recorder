@@ -230,8 +230,8 @@ a `hashref`.
 
     succinct() : Object
 
-The succinct method loads and returns the [FlightRecorder::Plugin::Succinct](https://metacpan.org/pod/FlightRecorder%3A%3APlugin%3A%3ASuccinct)
-report plugin.
+The succinct method loads and returns the
+[FlightRecorder::Plugin::ReportSuccinct](https://metacpan.org/pod/FlightRecorder%3A%3APlugin%3A%3AReportSuccinct) report plugin.
 
 - succinct example #1
 
@@ -256,8 +256,8 @@ provided.
 
     verbose() : Object
 
-The verbose method loads and returns the [FlightRecorder::Plugin::Verbose](https://metacpan.org/pod/FlightRecorder%3A%3APlugin%3A%3AVerbose)
-report plugin.
+The verbose method loads and returns the
+[FlightRecorder::Plugin::ReportVerbose](https://metacpan.org/pod/FlightRecorder%3A%3APlugin%3A%3AReportVerbose) report plugin.
 
 - verbose example #1
 

@@ -331,8 +331,8 @@ a C<hashref>.
 
   succinct() : Object
 
-The succinct method loads and returns the L<FlightRecorder::Plugin::Succinct>
-report plugin.
+The succinct method loads and returns the
+L<FlightRecorder::Plugin::ReportSuccinct> report plugin.
 
 =over 4
 
@@ -369,8 +369,8 @@ provided.
 
   verbose() : Object
 
-The verbose method loads and returns the L<FlightRecorder::Plugin::Verbose>
-report plugin.
+The verbose method loads and returns the
+L<FlightRecorder::Plugin::ReportVerbose> report plugin.
 
 =over 4
 

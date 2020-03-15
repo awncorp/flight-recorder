@@ -234,7 +234,7 @@ METHODS
       succinct() : Object
 
     The succinct method loads and returns the
-    FlightRecorder::Plugin::Succinct report plugin.
+    FlightRecorder::Plugin::ReportSuccinct report plugin.
 
     succinct example #1
 
@@ -260,7 +260,7 @@ METHODS
       verbose() : Object
 
     The verbose method loads and returns the
-    FlightRecorder::Plugin::Verbose report plugin.
+    FlightRecorder::Plugin::ReportVerbose report plugin.
 
     verbose example #1
 
