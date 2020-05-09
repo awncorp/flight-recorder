@@ -18,10 +18,8 @@
 !STABILITY.md
 !TEMPLATE
 !VERSION
-!build
 !cpanfile
 !dist.ini
-!release
 
 !.editorconfig
 !.gitattributes
