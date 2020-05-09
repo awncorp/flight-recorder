@@ -1,6 +1,13 @@
 Changelog for FlightRecorder
 
-0.03 2020-03-15T03:25:31
+0.04 2020-05-09T14:13:59
+ - Added release updates
+ - Updated documentation
+ - Miscellaneous housekeeping
+ - Fix regexp in test issue
+
+0.03 2020-03-15T03:36:46
+ - Built release version 0.03
  - Added release updates
  - Fix links to reporting modules
 
