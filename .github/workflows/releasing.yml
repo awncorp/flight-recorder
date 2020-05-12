@@ -178,6 +178,8 @@ jobs:
       run: git config --global github.user ${{ secrets.GithubUser }}
     - name: Setup GitHub Token
       run: git config --global github.token ${{ secrets.GithubToken }}
+    - name: Pull Git Tags
+      run: git fetch --all
     - name: Install CPANM
       run: sudo apt install -y cpanminus
     - name: Install Dist::Zilla
