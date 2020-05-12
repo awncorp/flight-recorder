@@ -18,6 +18,12 @@ with 'Data::Object::Role::Throwable';
 
 # ATTRIBUTES
 
+has 'auto' => (
+  is => 'ro',
+  isa => 'Maybe[FileHandle]',
+  def => sub{\*STDOUT},
+);
+
 has 'head' => (
   is => 'ro',
   isa => 'Str',
@@ -78,6 +84,8 @@ method begin(Str $name) {
   $self->context($name);
   $self->message('debug', join(' ', $self->name, 'began'), [1,2]);
 
+  $self->output($self->auto) if $self->auto;
+
   return $self;
 }
 
@@ -89,6 +97,8 @@ method branch(Str $name) {
 
   $self->context($name);
   $self->message('debug', join(' ', $self->name, 'began'), [1,2]);
+
+  $self->output($self->auto) if $self->auto;
 
   return $self;
 }
@@ -113,11 +123,15 @@ method data(HashRef[Str] $data) {
 method debug(Str @messages) {
   $self->message('debug', join(' ', @messages), [1,2]);
 
+  $self->output($self->auto) if $self->auto;
+
   return $self;
 }
 
 method end() {
   $self->message('debug', join(' ', $self->name, 'ended'), [1,2]);
+
+  $self->output($self->auto) if $self->auto;
 
   return $self;
 }
@@ -125,11 +139,15 @@ method end() {
 method error(Str @messages) {
   $self->message('error', join(' ', @messages), [1,2]);
 
+  $self->output($self->auto) if $self->auto;
+
   return $self;
 }
 
 method fatal(Str @messages) {
   $self->message('fatal', join(' ', @messages), [1,2]);
+
+  $self->output($self->auto) if $self->auto;
 
   return $self;
 }
@@ -204,6 +222,8 @@ method head_level() {
 method info(Str @messages) {
   $self->message('info', join(' ', @messages), [1,2]);
 
+  $self->output($self->auto) if $self->auto;
+
   return $self;
 }
 
@@ -212,6 +232,8 @@ method initialize(Tuple[Int, Int] $frames) {
 
   $self->context('main');
   $self->message('debug', join(' ', $self->name, 'began'), $index);
+
+  $self->output($self->auto) if $self->auto;
 
   return $self;
 }
