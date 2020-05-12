@@ -19,7 +19,9 @@ Logging for Distributed Systems
 
   use FlightRecorder;
 
-  my $f = FlightRecorder->new;
+  my $f = FlightRecorder->new(
+    auto => undef
+  );
 
   # $f->begin('try');
   # $f->debug('something happend');
@@ -56,6 +58,14 @@ L<Types::Standard>
 =head1 ATTRIBUTES
 
 This package has the following attributes:
+
+=cut
+
+=head2 auto
+
+  auto(Maybe[FileHandle])
+
+This attribute is read-only, accepts C<(Maybe[FileHandle])> values, and is optional.
 
 =cut
 
@@ -266,7 +276,8 @@ The info method logs an C<info> level event with context.
   output(FileHandle $handle) : Str
 
 The output method outputs the last event using the format defined in the
-C<format> attribute.
+C<format> attribute. This method is called automatically after each log-event
+if the C<auto> attribute is set, which is by default set to C<STDOUT>.
 
 =over 4
 
@@ -275,6 +286,30 @@ C<format> attribute.
   # given: synopsis
 
   $f->begin('test')->output
+
+=back
+
+=over 4
+
+=item output example #2
+
+  package main;
+
+  use FlightRecorder;
+
+  my $f = FlightRecorder->new;
+
+  $f->begin('try');
+
+  # $f->output
+
+  $f->debug('something happened');
+
+  # $f->output
+
+  $f->end;
+
+  # $f->output
 
 =back
 
