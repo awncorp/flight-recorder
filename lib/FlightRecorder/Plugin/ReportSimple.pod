@@ -3,13 +3,13 @@
 
 =head1 NAME
 
-FlightRecorder::Plugin::ReportSuccinct
+FlightRecorder::Plugin::ReportSimple
 
 =cut
 
 =head1 ABSTRACT
 
-Succinct FlightRecorder Report Generator
+Simple FlightRecorder Report Generator
 
 =cut
 
@@ -18,10 +18,10 @@ Succinct FlightRecorder Report Generator
   package main;
 
   use FlightRecorder;
-  use FlightRecorder::Plugin::ReportSuccinct;
+  use FlightRecorder::Plugin::ReportSimple;
 
   my $f = FlightRecorder->new(auto => undef);
-  my $r = FlightRecorder::Plugin::ReportSuccinct->new(flight_recorder => $f);
+  my $r = FlightRecorder::Plugin::ReportSimple->new(flight_recorder => $f);
 
   $f->begin('main');
   $f->debug('something happened');
@@ -86,7 +86,7 @@ This package implements the following methods:
 
   generate() : Str
 
-The generate method generates a succint report of activity captured by
+The generate method generates a simple report of activity captured by
 L<FlightRecorder>.
 
 =over 4
