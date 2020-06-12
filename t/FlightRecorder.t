@@ -14,6 +14,12 @@ FlightRecorder
 
 =cut
 
+=tagline
+
+Structured Logging
+
+=cut
+
 =abstract
 
 Logging for Distributed Systems
