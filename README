@@ -1,6 +1,6 @@
 NAME
 
-    FlightRecorder
+    FlightRecorder - Structured Logging
 
 ABSTRACT
 
@@ -259,6 +259,19 @@ METHODS
         # given: synopsis
       
         $f->begin('main')->serialize
+
+ simple
+
+      simple() : Object
+
+    The simple method loads and returns the
+    FlightRecorder::Plugin::ReportSimple report plugin.
+
+    simple example #1
+
+        # given: synopsis
+      
+        $f->simple
 
  succinct
 
