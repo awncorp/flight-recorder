@@ -9,13 +9,13 @@ use Test::More;
 
 =name
 
-FlightRecorder::Plugin::ReportVerbose
+FlightRecorder::Plugin::ReportSimple
 
 =cut
 
 =abstract
 
-Verbose FlightRecorder Report Generator
+Simple FlightRecorder Report Generator
 
 =cut
 
@@ -31,10 +31,10 @@ method: output
   package main;
 
   use FlightRecorder;
-  use FlightRecorder::Plugin::ReportVerbose;
+  use FlightRecorder::Plugin::ReportSimple;
 
   my $f = FlightRecorder->new(auto => undef);
-  my $r = FlightRecorder::Plugin::ReportVerbose->new(flight_recorder => $f);
+  my $r = FlightRecorder::Plugin::ReportSimple->new(flight_recorder => $f);
 
   $f->begin('main');
   $f->debug('something happened');
@@ -50,29 +50,29 @@ Types::Standard
 
 =cut
 
-=attributes
-
-level: rw, opt, Enum[qw(debug info warn error fatal)]
-flight_recorder: ro, req, InstanceOf['FlightRecorder']
-
-=cut
-
 =inherits
 
 FlightRecorder::Plugin::Report
 
 =cut
 
+=attributes
+
+flight_recorder: ro, req, InstanceOf['FlightRecorder']
+level: rw, opt, Enum[qw(debug info warn error fatal)]
+
+=cut
+
 =description
 
 This package provides a mechanism for converting a L<FlightRecorder> event log
-into a human-readable report.
+into a printable report.
 
 =cut
 
 =method generate
 
-The generate method generates a verbose report of activity captured by
+The generate method generates a simple report of activity captured by
 L<FlightRecorder>.
 
 =signature generate
@@ -112,7 +112,7 @@ my $subs = $test->standard;
 
 $subs->synopsis(fun($tryable) {
   ok my $result = $tryable->result;
-  ok $result->isa('FlightRecorder::Plugin::ReportVerbose');
+  ok $result->isa('FlightRecorder::Plugin::ReportSimple');
   ok $result->isa('FlightRecorder::Plugin::Report');
   ok $result->flight_recorder;
   is $result->level, 'debug';
@@ -130,9 +130,7 @@ $subs->example(-1, 'generate', 'method', fun($tryable) {
   my $year = qr/\d{4}/;
   my $context = qr/\[\d{4}\]/;
   my $level = qr/\@debug/;
-  my $quote = qr/['"]*/;
-  my $process = qr/\[\d+\]/;
-  my $begin = qr/BEGIN/;
+  my $string = qr/.*/;
 
   my $line1 = join qr/\s+/, (
     $dow,
@@ -142,27 +140,10 @@ $subs->example(-1, 'generate', 'method', fun($tryable) {
     $year,
     $context,
     $level,
-    $process,
-    $begin
+    $string
   );
 
   like $result, qr/$line1/;
-  like $result, qr/In \(eval \d+\) at line #\d+/;
-
-  like $result,
-    qr/\{\n\s\scontext: 'main',\n\s\smessage: 'main began'\n\}/;
-  like $result,
-    qr/\{\n\s\scontext: 'main',\n\s\smessage: 'something happened'\n\}/;
-  like $result,
-    qr/\{\n\s\scontext: 'main',\n\s\smessage: 'main ended'\n\}/;
-
-  like $result, qr/package: 'main'/;
-  like $result, qr/process: $quote\d+$quote/;
-  like $result, qr/subroutine: '\(eval\)'/;
-  like $result, qr/timestamp: \d+/;
-  like $result, qr/version: 'no-version'/;
-
-  $result
 });
 
 ok 1 and done_testing;

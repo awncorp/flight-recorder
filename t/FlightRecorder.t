@@ -33,6 +33,7 @@ method: info
 method: output
 method: report
 method: serialize
+method: simple
 method: succinct
 method: switch
 method: verbose
@@ -298,6 +299,23 @@ serialize() : HashRef
 
 =cut
 
+=method simple
+
+The simple method loads and returns the
+L<FlightRecorder::Plugin::ReportSimple> report plugin.
+
+=signature simple
+
+simple() : Object
+
+=example-1 simple
+
+  # given: synopsis
+
+  $f->simple
+
+=cut
+
 =method succinct
 
 The succinct method loads and returns the
@@ -523,6 +541,16 @@ $subs->example(-1, 'serialize', 'method', fun($tryable) {
   ok $result->{zeros};
 
   ok !$result->{item};
+
+  $result
+});
+
+$subs->example(-1, 'simple', 'method', fun($tryable) {
+  ok my $result = $tryable->result;
+  ok $result->isa('FlightRecorder::Plugin::ReportSimple');
+  ok $result->isa('FlightRecorder::Plugin::Report');
+  ok $result->flight_recorder;
+  is $result->level, 'debug';
 
   $result
 });

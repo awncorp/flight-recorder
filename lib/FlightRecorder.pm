@@ -351,6 +351,11 @@ method serialize() {
   return $data;
 }
 
+method simple(Str $level = $self->level) {
+
+  return $self->report('simple', $level);
+}
+
 method succinct(Str $level = $self->level) {
 
   return $self->report('succinct', $level);
