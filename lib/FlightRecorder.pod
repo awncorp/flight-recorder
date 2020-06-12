@@ -3,7 +3,7 @@
 
 =head1 NAME
 
-FlightRecorder
+FlightRecorder - Structured Logging
 
 =cut
 
@@ -357,6 +357,25 @@ a C<hashref>.
   # given: synopsis
 
   $f->begin('main')->serialize
+
+=back
+
+=cut
+
+=head2 simple
+
+  simple() : Object
+
+The simple method loads and returns the
+L<FlightRecorder::Plugin::ReportSimple> report plugin.
+
+=over 4
+
+=item simple example #1
+
+  # given: synopsis
+
+  $f->simple
 
 =back
 

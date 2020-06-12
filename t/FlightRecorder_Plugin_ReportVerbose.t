@@ -159,7 +159,7 @@ $subs->example(-1, 'generate', 'method', fun($tryable) {
   like $result, qr/package: 'main'/;
   like $result, qr/process: $quote\d+$quote/;
   like $result, qr/subroutine: '\(eval\)'/;
-  like $result, qr/timestamp: \d+/;
+  like $result, qr/timestamp: $quote\d+$quote/;
   like $result, qr/version: 'no-version'/;
 
   $result

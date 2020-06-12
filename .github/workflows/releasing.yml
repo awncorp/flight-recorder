@@ -167,9 +167,7 @@ jobs:
     needs: ["Perl-5300", "Perl-5280", "Perl-5260", "Perl-5240", "Perl-5220", "Perl-5182"]
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+    - uses: actions/checkout@v1
     - name: Setup Git User
       run: git config --global user.name "Al Newkirk"
     - name: Setup Git Email
@@ -178,8 +176,6 @@ jobs:
       run: git config --global github.user ${{ secrets.GithubUser }}
     - name: Setup GitHub Token
       run: git config --global github.token ${{ secrets.GithubToken }}
-    - name: Pull Git Tags
-      run: git fetch --all
     - name: Install CPANM
       run: sudo apt install -y cpanminus
     - name: Install Dist::Zilla
@@ -192,5 +188,13 @@ jobs:
       run: dzil clean
     - name: Build Project Distribution
       run: V=$(cat VERSION) DZIL_RELEASING=1 dzil build
+    - name: Discard Generated Changelog
+      run: git checkout CHANGES
+    - name: Discard Generated Tarball
+      run: rm $(ls *.tar.gz)
+    - name: Copy CHANGES to Build Directory
+      run: cp -f CHANGES $(echo *-$(cat VERSION))
+    - name: Manually Create Release Tarball
+      run: tar czf $(echo *-$(cat VERSION)).tar.gz $(echo *-$(cat VERSION))
     - name: Upload to CPAN
       run: cpan-upload -u ${{ secrets.CpanUser }} -p ${{ secrets.CpanPass }} $(ls *.tar.gz)

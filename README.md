@@ -1,6 +1,6 @@
 # NAME
 
-FlightRecorder
+FlightRecorder - Structured Logging
 
 # ABSTRACT
 
@@ -254,6 +254,19 @@ a `hashref`.
         # given: synopsis
 
         $f->begin('main')->serialize
+
+## simple
+
+    simple() : Object
+
+The simple method loads and returns the
+[FlightRecorder::Plugin::ReportSimple](https://metacpan.org/pod/FlightRecorder%3A%3APlugin%3A%3AReportSimple) report plugin.
+
+- simple example #1
+
+        # given: synopsis
+
+        $f->simple
 
 ## succinct
 

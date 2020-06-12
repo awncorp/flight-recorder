@@ -159,7 +159,7 @@ $subs->example(-1, 'generate', 'method', fun($tryable) {
   unlike $result, qr/package: 'main'/;
   unlike $result, qr/process: $quote\d+$quote/;
   unlike $result, qr/subroutine: \(eval\)/;
-  unlike $result, qr/timestamp: \d+/;
+  unlike $result, qr/timestamp: $quote\d+$quote/;
   unlike $result, qr/version: 'no-version'/;
 
   $result
