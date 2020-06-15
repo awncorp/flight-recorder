@@ -1,6 +1,12 @@
 Changelog for FlightRecorder
 
-0.07 2020-06-12T20:56:14
+0.08 2020-06-15T16:52:16
+ - Add release updates
+ - Add "reset" method (#24)
+ - Add "count" method (#23)
+
+0.07 2020-06-12T20:57:41
+ - Built release version 0.07
  - Add release updates
  - Housekeeping
  - Add "simple" log report (#19)
