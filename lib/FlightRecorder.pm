@@ -343,6 +343,15 @@ method report(Str $name, Str $level = $self->level) {
   return $self->plugin("report_$name" => (%args));
 }
 
+method reset() {
+  delete $self->{head};
+  delete $self->{item};
+  delete $self->{refs};
+  delete $self->{logs};
+
+  return $self;
+}
+
 method serialize() {
   my $data = {};
 
