@@ -30,6 +30,7 @@ Logging for Distributed Systems
 
 method: begin
 method: branch
+method: count
 method: data
 method: debug
 method: end
@@ -127,6 +128,38 @@ branch(Str $label) : Object
   # given: synopsis
 
   $f->begin('test')->branch('next')
+
+=cut
+
+=method count
+
+The count method returns the total number of log entries, or the number of log
+entries matching the log level specified.
+
+=signature count
+
+count(Maybe[Str] $level) : Int
+
+=example-1 count
+
+  # given: synopsis
+
+  $f->begin('try')->debug('something happend')->end;
+  $f->count;
+
+=example-2 count
+
+  # given: synopsis
+
+  $f->info('something happened');
+  $f->count('info');
+
+=example-3 count
+
+  # given: synopsis
+
+  $f->fatal('something happened');
+  $f->count('fatal');
 
 =cut
 
@@ -420,6 +453,27 @@ $subs->example(-1, 'branch', 'method', fun($tryable) {
   is $result->refs->{'0002'}, 'next';
   is $result->logs->[0]{message}, 'test began';
   is $result->logs->[1]{message}, 'next began';
+
+  $result
+});
+
+$subs->example(-1, 'count', 'method', fun($tryable) {
+  ok my $result = $tryable->result;
+  is $result, 3;
+
+  $result
+});
+
+$subs->example(-2, 'count', 'method', fun($tryable) {
+  ok my $result = $tryable->result;
+  is $result, 1;
+
+  $result
+});
+
+$subs->example(-3, 'count', 'method', fun($tryable) {
+  ok my $result = $tryable->result;
+  is $result, 1;
 
   $result
 });

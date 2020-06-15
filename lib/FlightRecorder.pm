@@ -103,6 +103,10 @@ method branch(Str $name) {
   return $self;
 }
 
+method count(Maybe[Str] $level) {
+  return int scalar grep {$level ? $$_{level} eq "$level" : 1} @{$self->{logs}};
+}
+
 method context(Str $name) {
   my $head = $self->next_refs;
 
