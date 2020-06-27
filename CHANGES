@@ -1,1 +1,53 @@
 Changelog for FlightRecorder
+
+0.09 2020-06-27T15:54:50
+ - Add release updates
+ - Refactor report generation (#27)
+
+0.08 2020-06-15T16:53:38
+ - Built release version 0.08
+ - Add release updates
+ - Add "reset" method (#24)
+ - Add "count" method (#23)
+
+0.07 2020-06-12T20:57:41
+ - Built release version 0.07
+ - Add release updates
+ - Housekeeping
+ - Add "simple" log report (#19)
+
+0.06 2020-05-12T20:39:25
+ - Built release version 0.06
+ - Added release updates
+ - Fix release changelog
+
+0.05 2020-05-12T19:41:22
+ - Built release version 0.05
+ - Added release updates
+ - Update release workflow
+ - Add ability to trigger "output" automatically (#15)
+
+0.04 2020-05-09T14:14:00
+ - Built release version 0.04
+ - Added release updates
+ - Updated documentation
+ - Miscellaneous housekeeping
+ - Fix regexp in test issue
+
+0.03 2020-03-15T03:36:46
+ - Built release version 0.03
+ - Added release updates
+ - Fix links to reporting modules
+
+0.02 2020-03-14T20:45:45
+ - Built release version 0.02
+ - Added release updates
+ - Document type library
+ - Fix regexp in test of process
+
+0.01 2020-03-12T02:54:30
+ - Built release version 0.01
+ - Added release updates
+ - Updated documentation
+ - Initial implementation
+ - Initial commit
